@@ -2,7 +2,9 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 
-def plot_history(history):
+def plot_history(history, save_path=None):
+    import matplotlib.pyplot as plt
+
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
     ax1.plot(history.history["loss"], label="loss")
     ax1.plot(history.history["val_loss"], label="val_loss")
@@ -14,4 +16,9 @@ def plot_history(history):
     ax2.set_xlabel("Epoch")
     ax2.set_ylabel("Accuracy")
     ax2.grid(True)
-    plt.show()
+    plt.legend()
+    if save_path:
+        plt.savefig(save_path)
+        plt.close()
+    else:
+        plt.show()
